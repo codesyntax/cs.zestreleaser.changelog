@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.0dev (unreleased)
--------------------
+0.1 (2014-12-12)
+----------------
 
 - Initial implementation: asks the user if he wants to add the last commits made since the last tag to the CHANGES file. This initial implementation works only with git.
