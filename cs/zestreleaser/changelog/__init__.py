@@ -55,4 +55,3 @@ def prettyfy_logs(data, vcs):
         new_data = data.split('\n')
 
     return new_data
-
