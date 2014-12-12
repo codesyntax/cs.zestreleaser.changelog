@@ -6,12 +6,17 @@ from copy import copy
 
 
 def fillchangelog(context):
-    if zest.releaser.utils.ask('Do you want to add commits to changelog?', True):
-        vcs = zest.releaser.choose.version_control()
-        found = zest.releaser.utils.get_last_tag(vcs)
-        log_command = vcs.cmd_log_since_tag(found)
-        data = zest.releaser.utils.system(log_command)
-        pretty_data = prettyfy_logs(data, vcs)
+    vcs = zest.releaser.choose.version_control()
+    found = zest.releaser.utils.get_last_tag(vcs)
+    log_command = vcs.cmd_log_since_tag(found)
+    data = zest.releaser.utils.system(log_command)
+    pretty_data = prettyfy_logs(data, vcs)
+
+    print 'These are all the commits since the last tag:'
+    print ''
+    print '\n'.join(pretty_data)
+
+    if zest.releaser.utils.ask('Do you want to add those commits to the CHANGES file?', True):
         new_history_lines = []
         history_lines = copy(context.get('history_lines', []))
         for line in history_lines:

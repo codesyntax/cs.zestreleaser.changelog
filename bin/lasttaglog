@@ -1,0 +1,14 @@
+#!/home/erral/dev/releaser/cs.zestreleaser.changelog/bin/python
+
+import sys
+sys.path[0:0] = [
+    '/home/erral/dev/releaser/cs.zestreleaser.changelog',
+    '/home/erral/zope/downloads/eggs/zest.releaser-3.53.2-py2.7.egg',
+    '/home/erral/zope/downloads/eggs/setuptools-0.9.8-py2.7.egg',
+    ]
+
+
+import zest.releaser.lasttaglog
+
+if __name__ == '__main__':
+    sys.exit(zest.releaser.lasttaglog.main())
