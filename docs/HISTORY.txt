@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.2 (unreleased)
+0.2 (2014-12-12)
 ----------------
 
 - Show all the commits made since the last tag to the user before asking anything.
