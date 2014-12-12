@@ -1,6 +1,10 @@
-Introduction
-============
+==========================================
+Fill the changelog using VCS's log feature
+==========================================
 
 
+Using the features available at zest.releser.lasttaglog this module
+fills the CHANGES file using the VCS's log command.
 
-This product may contain traces of nuts.
+Actual implementation only works with git.
+
