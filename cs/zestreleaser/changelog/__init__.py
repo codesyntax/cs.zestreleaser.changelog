@@ -5,11 +5,17 @@ import zest.releaser.git
 from copy import copy
 
 
+try:
+    from zest.releaser.utils import system as execute_command
+except ImportError:
+    from zest.releaser.utils import execute_command
+
+
 def fillchangelog(context):
     vcs = zest.releaser.choose.version_control()
     found = zest.releaser.utils.get_last_tag(vcs)
     log_command = vcs.cmd_log_since_tag(found)
-    data = zest.releaser.utils.system(log_command)
+    data = execute_command(log_command)
     pretty_data = prettyfy_logs(data, vcs)
 
     print 'These are all the commits since the last tag:'
