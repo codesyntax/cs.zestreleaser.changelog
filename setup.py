@@ -46,7 +46,7 @@ setup(
         'zest.releaser',
     ],
     entry_points={
-        'zest.releaser.prereleaser.middle':
+        'zest.releaser.prereleaser.before':
         ['fillchangelog=cs.zestreleaser.changelog:fillchangelog']
     },
 )
