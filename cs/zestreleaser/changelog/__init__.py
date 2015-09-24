@@ -23,9 +23,9 @@ def fillchangelog(context):
         data = execute_command(log_command)
         pretty_data = prettyfy_logs(data, vcs)
 
-        print 'These are all the commits since the last tag:'
-        print ''
-        print '\n'.join(pretty_data)
+        print('These are all the commits since the last tag:')
+        print('')
+        print('\n'.join(pretty_data))
 
         if zest.releaser.utils.ask('Do you want to add those commits to the CHANGES file?', True):
             new_history_lines = []
