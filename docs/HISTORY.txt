@@ -1,10 +1,17 @@
 Changelog
 =========
 
-0.4 (unreleased)
+0.4 (2015-09-24)
 ----------------
 
-- Nothing changed yet.
+- use print as function [Mikel Larreategi <mlarreategi@codesyntax.com>]
+
+- get all commits when no tags are found [Mikel Larreategi <mlarreategi@codesyntax.com>]
+
+- documentation and buildout update [Mikel Larreategi <mlarreategi@codesyntax.com>]
+
+- hook changelog filler before the preleaser, because now zest.releaser checks for 'not changes yet' before the middle hook is run [Mikel Larreategi <mlarreategi@codesyntax.com>]
+
 
 
 0.3 (2015-05-25)
