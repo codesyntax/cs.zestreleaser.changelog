@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.5 (unreleased)
+0.5 (2015-09-30)
 ----------------
 
 - fix history checking [Mikel Larreategi <mlarreategi@codesyntax.com>]
