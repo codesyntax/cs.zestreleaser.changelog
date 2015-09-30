@@ -1,8 +1,9 @@
+from zest.releaser import pypi
+from zest.releaser.utils import read_text_file
+from zest.releaser.utils import write_text_file
 import zest.releaser.choose
-import zest.releaser.utils
 import zest.releaser.git
-
-from copy import copy
+import zest.releaser.utils
 
 
 try:
@@ -12,39 +13,53 @@ except ImportError:
 
 
 def fillchangelog(context):
+    default_location = None
+    setup_cfg = pypi.SetupConfig()
+    config = setup_cfg.config
+    if config and config.has_option('zest.releaser', 'history_file'):
+        default_location = config.get('zest.releaser', 'history_file')
+
     vcs = zest.releaser.choose.version_control()
-    try:
-        found = zest.releaser.utils.get_last_tag(vcs)
-        log_command = vcs.cmd_log_since_tag(found)
-    except SystemExit:
-        log_command = get_all_commits_command(vcs)
+    history_file = vcs.history_file(location=default_location)
+    if history_file:
 
-    if log_command:
-        data = execute_command(log_command)
-        pretty_data = prettyfy_logs(data, vcs)
+        try:
+            found = zest.releaser.utils.get_last_tag(vcs)
+            log_command = vcs.cmd_log_since_tag(found)
+        except SystemExit:
+            log_command = get_all_commits_command(vcs)
 
-        print('These are all the commits since the last tag:')
-        print('')
-        print('\n'.join(pretty_data))
+        if log_command:
+            data = execute_command(log_command)
+            pretty_data = prettyfy_logs(data, vcs)
 
-        if zest.releaser.utils.ask('Do you want to add those commits to the CHANGES file?', True):
-            new_history_lines = []
-            history_lines = copy(context.get('history_lines', []))
-            for line in history_lines:
-                current_position = history_lines.index(line)
-                new_history_lines.append(line)
-                if line.startswith('%s ' % context.get('new_version')):
-                    # current_position + 1 == ----------------
-                    # current_position + 2 ==   blank
-                    # current_position + 3 == - Nothing changed yet.
-                    # current_position + 4 ==   blank
-                    new_history_lines.append(history_lines[current_position + 1])
-                    new_history_lines.append(history_lines[current_position + 2])
-                    new_history_lines.extend(pretty_data)
-                    new_history_lines.extend(history_lines[current_position + 4:])
-                    break
+            print('These are all the commits since the last tag:')
+            print('')
+            print('\n'.join(pretty_data))
 
-            context.update({'history_lines': new_history_lines})
+            if zest.releaser.utils.ask('Do you want to add those commits to the CHANGES file?', True):
+                new_history_lines = []
+                history_lines, history_encoding = read_text_file(history_file)
+                history_lines = history_lines.split('\n')
+                for line in history_lines:
+                    current_position = history_lines.index(line)
+                    new_history_lines.append(line)
+                    if line.startswith('%s ' % context.get('new_version')):
+                        # current_position + 1 == ----------------
+                        # current_position + 2 ==   blank
+                        # current_position + 3 == - Nothing changed yet.
+                        # current_position + 4 ==   blank
+                        new_history_lines.append(history_lines[current_position + 1])
+                        new_history_lines.append(history_lines[current_position + 2])
+                        new_history_lines.extend(pretty_data)
+                        new_history_lines.extend(history_lines[current_position + 4:])
+                        break
+
+                contents = '\n'.join(new_history_lines)
+                write_text_file(history_file, contents)
+                #context.update({'nothing_changed_yet': None})
+    else:
+        print('History file not found. Skipping.')
 
 
 def prettyfy_logs(data, vcs):
