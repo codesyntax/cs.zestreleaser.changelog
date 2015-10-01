@@ -1,6 +1,7 @@
 from zest.releaser import pypi
 from zest.releaser.utils import read_text_file
 from zest.releaser.utils import write_text_file
+from zest.releaser.utils import execute_command
 import zest.releaser.choose
 import zest.releaser.git
 import zest.releaser.utils
@@ -44,7 +45,7 @@ def fillchangelog(context):
                 for line in history_lines:
                     current_position = history_lines.index(line)
                     new_history_lines.append(line)
-                    if line.startswith('%s ' % context.get('new_version')):
+                    if line.lower().find('unreleased') != -1:
                         # current_position + 1 == ----------------
                         # current_position + 2 ==   blank
                         # current_position + 3 == - Nothing changed yet.
@@ -57,7 +58,10 @@ def fillchangelog(context):
 
                 contents = '\n'.join(new_history_lines)
                 write_text_file(history_file, contents)
-                #context.update({'nothing_changed_yet': None})
+                msg = 'Update changelog'
+                commit_cmd = vcs.cmd_commit(msg)
+                commit = execute_command(commit_cmd)
+                print(commit)
     else:
         print('History file not found. Skipping.')
 
