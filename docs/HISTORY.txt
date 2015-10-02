@@ -1,11 +1,10 @@
 Changelog
 =========
 
-0.7 (unreleased)
+0.7 (2015-10-02)
 ----------------
 
-- Nothing changed yet.
-
+- Unicode support for changelog entries [erral]
 
 0.6 (2015-10-01)
 ----------------
