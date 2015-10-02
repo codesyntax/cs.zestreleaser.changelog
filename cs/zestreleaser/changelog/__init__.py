@@ -75,19 +75,19 @@ def prettyfy_logs(data, vcs):
         # Q: How to prettyfy git logs?
         # A: Take just the lines that start with whitespaces
         author = ''
-        for line in data.split('\n'):
-            if line and line.startswith('Author: '):
-                author = line.replace('Author: ', '')
-            if line and line.startswith(' '):
-                if not line.strip().lower().startswith('back to development'):
-                    new_data.append('- {0} [{1}]'.format(
+        for line in data.split(u'\n'):
+            if line and line.startswith(u'Author: '):
+                author = line.replace(u'Author: ', '')
+            if line and line.startswith(u' '):
+                if not line.strip().lower().startswith(u'back to development'):
+                    new_data.append(u'- {0} [{1}]'.format(
                         line.strip(),
                         author)
                     )
-                    new_data.append('')
+                    new_data.append(u'')
     else:
         # Not implemented yet
-        new_data = data.split('\n')
+        new_data = data.split(u'\n')
 
     return new_data
 
