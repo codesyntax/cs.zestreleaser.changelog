@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.8 (unreleased)
+0.8 (2020-02-24)
 ----------------
 
 - Changes due to changes in zest.releaser latest version
