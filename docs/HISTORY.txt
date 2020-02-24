@@ -4,7 +4,8 @@ Changelog
 0.8 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Changes due to changes in zest.releaser latest version
+  [uodriozola]
 
 
 0.7 (2015-10-02)

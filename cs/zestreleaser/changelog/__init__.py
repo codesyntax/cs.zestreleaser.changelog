@@ -41,7 +41,6 @@ def fillchangelog(context):
             if zest.releaser.utils.ask('Do you want to add those commits to the CHANGES file?', True):
                 new_history_lines = []
                 history_lines, history_encoding = read_text_file(history_file)
-                history_lines = history_lines.split('\n')
                 for line in history_lines:
                     current_position = history_lines.index(line)
                     new_history_lines.append(line)
