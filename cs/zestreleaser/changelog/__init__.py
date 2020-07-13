@@ -98,6 +98,6 @@ def get_all_commits_command(vcs):
         return 'bzr log'
     elif isinstance(vcs, zest.releaser.hg.Hg):
         return 'hg log'
-    elif isinstance(vcs, zest.releaser.svn.Svn):
+    elif isinstance(vcs, zest.releaser.svn.Subversion):
         url = vcs._svn_info()
         return 'svn --non-interactive log %s' % url
