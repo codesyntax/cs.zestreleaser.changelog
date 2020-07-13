@@ -4,7 +4,8 @@ Changelog
 1.1 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Tag commands should be lists.
+  [erral]
 
 
 1.0 (2020-07-13)
