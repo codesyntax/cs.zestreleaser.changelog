@@ -4,7 +4,11 @@ Changelog
 0.9 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Error control for missing tags
+  [erral]
+
+- Change svn base class
+  [erral]
 
 
 0.8 (2020-02-24)
