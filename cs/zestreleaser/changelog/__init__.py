@@ -25,8 +25,11 @@ def fillchangelog(context):
     if history_file:
 
         try:
-            found = zest.releaser.utils.get_last_tag(vcs)
-            log_command = vcs.cmd_log_since_tag(found)
+            found = zest.releaser.utils.get_last_tag(vcs, allow_missing=True)
+            if found:
+                log_command = vcs.cmd_log_since_tag(found)
+            else:
+                log_command = None
         except SystemExit:
             log_command = get_all_commits_command(vcs)
 
