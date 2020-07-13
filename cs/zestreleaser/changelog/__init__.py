@@ -96,11 +96,11 @@ def prettyfy_logs(data, vcs):
 
 def get_all_commits_command(vcs):
     if isinstance(vcs, zest.releaser.git.Git):
-        return 'git log'
+        return ["git", "log"]
     elif isinstance(vcs, zest.releaser.bzr.Bzr):
-        return 'bzr log'
+        return ["bzr", "log"]
     elif isinstance(vcs, zest.releaser.hg.Hg):
-        return 'hg log'
+        return ["hg", "log"]
     elif isinstance(vcs, zest.releaser.svn.Subversion):
         url = vcs._svn_info()
-        return 'svn --non-interactive log %s' % url
+        return ["svn", "--non-interactive", "log", url]
